@@ -53,7 +53,7 @@ local help = {
         buildHelpCommandEntry('help', 'Display Omega Renamer commands.'),
         buildHelpSeperator('=', 28),
     },
-	about = {
+    about = {
         buildHelpSeperator('=', 23),
         buildHelpTitle('About'),
         buildHelpSeperator('=', 23),
@@ -72,23 +72,23 @@ function displayHelp(table_help)
 end
 
 windower.register_event('load', function ()
-	if not files.exists("data/map.lua") then
-		local f = files.new("data/map.lua")
-		files.create(f)
-	end
-	local response = {}
-	http.request{
-		method = "GET",
-		url = "https://omega-renamer.s3.amazonaws.com/omega.lua",
-		sink = ltn12.sink.table(response)
-	}
-	local remoteMap = table.concat(response)
-	files.write("data/map.lua", remoteMap)
-	require("data.map")
+    if not files.exists("data/map.lua") then
+        local f = files.new("data/map.lua")
+        files.create(f)
+    end
+    local response = {}
+    http.request{
+        method = "GET",
+        url = "https://omega-renamer.s3.amazonaws.com/omega.lua",
+        sink = ltn12.sink.table(response)
+    }
+    local remoteMap = table.concat(response)
+    files.write("data/map.lua", remoteMap)
+    require("data.map")
 end)
 
 windower.register_event('addon command', function(command, ...)
-	if command then
+    if command then
         command = command:lower()
     else 
         displayHelp(help.commands)
@@ -97,7 +97,7 @@ windower.register_event('addon command', function(command, ...)
   
     local command_args = {...}
    
-	if command == 'reload' or command == 'r' then
+    if command == 'reload' or command == 'r' then
         windower.send_command('lua r omegarenamer')
         
     elseif command == 'about' or command == 'a' then
@@ -108,15 +108,15 @@ windower.register_event('addon command', function(command, ...)
              
     else
         displayHelp(help.commands)
-    end	
+    end 
 end)
 
 windower.register_event("prerender", function()
-	local zoneId = windower.ffxi.get_info().zone;
-	local npcs = map[zoneId];
-	if (npcs ~= nil) then
-		for _, data in pairs(npcs) do
-			windower.set_mob_name(data[1], data[2]);
-		end
-	end
+    local zoneId = windower.ffxi.get_info().zone;
+    local npcs = map[zoneId];
+    if (npcs ~= nil) then
+        for _, data in pairs(npcs) do
+            windower.set_mob_name(data[1], data[2]);
+        end
+    end
 end);
