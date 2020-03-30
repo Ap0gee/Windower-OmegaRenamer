@@ -84,7 +84,7 @@ Reloads the Omega Renamer addon. Below are the equivalent ways of calling the co
     
 **about**
 
-Displays information about the Battle Stations addon. Below are the equivalent ways of calling the command:
+Displays information about the Omega Renamer addon. Below are the equivalent ways of calling the command:
     
     //omegarenamer about
     //orenamer about
